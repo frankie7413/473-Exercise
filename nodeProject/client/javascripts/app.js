@@ -8,7 +8,7 @@ var main = function() {
             console.log(arr);
             return arr;
         };
-        
+        //resuse this function to display your results the type is the type of array
         var displayResult = function(type, result){
           $('#result').empty('');
           $('#result').append("Result for " + type  + " is " + result); 
