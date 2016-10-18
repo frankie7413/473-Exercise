@@ -19,6 +19,8 @@ app.get('/sq/:n', function (req,res){
 	return res.json({answer:result});
 });
 
+//// this functions work below ////
+
 // Average
 function get_average(nums){
         nums = nums.map(Number);
