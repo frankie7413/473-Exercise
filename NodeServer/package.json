@@ -1,0 +1,11 @@
+{
+  "name": "nodeServer",
+  "version": "0.0.1",
+  "dependencies": {
+    "body-parser": "^1.8.1",
+    "express": "4.9.x",
+    "mongodb": "^2.0.28",
+    "mongoose": "~4.1.10",
+    "redis": "^0.12.1"
+  }
+}
