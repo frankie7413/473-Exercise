@@ -46,16 +46,16 @@ app.post("/question", function (req, res) {
     var newq = new Question();
     newq.question = qvalue;
     newq.answer = avalue;
-		
+
     newq.save(function(err){
-				if(err){
-			      console.log(err);
+        if(err){
+            console.log(err);
             res.json({'result': 'question created successfully'});
         }else {
             res.json({'result': 'question created successfully'});
         }
-		});
-    
+  });
+
 });
 //answer
 
