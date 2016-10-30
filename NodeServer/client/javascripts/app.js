@@ -1,33 +1,27 @@
 var main = function() {
 	"use strict";
 
-	//gets value for average from input field        
-        var getAverage = function() {
-            var arr = $('#average').val();
-	    arr = arr.split(" ");
-            console.log(arr);
-            return arr;
-        };
-        
-        var displayResult = function(type, result){
-          $('#result').empty('');
-          $('#result').append("Result for " + type  + " is " + result); 
-        };
+    console.log('loaded');
+    var displayResult = function(result){
+	     $('#result').empty('');
+	     $('#result').append(result); 
+    };
 
         //sends json object to server
-	$("#avgbt").click(function(){
+    $("#create").click(function(){
+        console.log('clicked here');
         //create json object
-        var myArray = {'average': []};
-        myArray.average = getAverage();
-		
-		$.ajax({
-			method: "POST",
-			url: "/average",
-			data: myArray
-		}).done(function(response) {
-			console.log("average data sent");
-                        displayResult('average', response.result);
-			})
+        var myQuestion = {};
+        myQuestion.answer = $('#answer').val();
+        myQuestion.question = $('#question').val();
+
+						$.ajax({
+							method: "POST",
+							url: "/question",
+							data: myQuestion
+						}).done(function(response) {
+								 displayResult(response.result);
+						})
 	});
 
 };

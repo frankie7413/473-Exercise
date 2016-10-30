@@ -3,8 +3,7 @@ var express = require("express"),
         bodyParser = require('body-parser'),
 	app = express();
 
-var MongoClient = require("mongodb").MongoClient;
-var mongourl = "mongodb://localhost/test";
+var mongoose = require('mongoose');
 
 var redis = require("redis"),
     client = redis.createClient();
@@ -17,11 +16,16 @@ app.use(express.static(__dirname + "/client"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+//models
+var Schema = mongoose.Schema;
 
+var questionSchema = new Schema({
+    question: String,
+    answer: String
+});
 
-// Writing function for stuffe
-var trivia = {};
-var score = {}; 
+var Question = mongoose.model('Question', questionSchema);
+
 
 //questions
 
@@ -32,7 +36,26 @@ app.get("/question", function (req, res) {
 
 
 app.post("/question", function (req, res) {
+    var qvalue = req.body.question;
+    var avalue = req.body.answer;
 
+    console.log('i am in post');
+    console.log(qvalue);
+    console.log(avalue);
+
+    var newq = new Question();
+    newq.question = qvalue;
+    newq.answer = avalue;
+		
+    newq.save(function(err){
+				if(err){
+			      console.log(err);
+            res.json({'result': 'question created successfully'});
+        }else {
+            res.json({'result': 'question created successfully'});
+        }
+		});
+    
 });
 //answer
 
@@ -47,8 +70,15 @@ app.post("/score", function (req, res) {
 });
 
 
+mongoose.connect("mongodb://localhost/test");
 
+var db = mongoose.connection;
 
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function(callback) {
+  // yay!
+  console.log('success');
+});
 
 
 console.log("listening on localhost:3000");
