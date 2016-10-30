@@ -50,7 +50,7 @@ app.post("/question", function (req, res) {
     newq.save(function(err){
         if(err){
             console.log(err);
-            res.json({'result': 'question created successfully'});
+            res.json({'result': 'question was not created'});
         }else {
             res.json({'result': 'question created successfully'});
         }
