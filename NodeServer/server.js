@@ -3,7 +3,9 @@ var express = require("express"),
         bodyParser = require('body-parser'),
 	app = express();
 
-var mongoose = require('mongoose');
+var MongoClient = require("mongodb").MongoClient;
+var mongourl = "mongodb://localhost/test";
+
 var redis = require("redis"),
     client = redis.createClient();
 
@@ -24,6 +26,7 @@ var score = {};
 //questions
 
 app.get("/question", function (req, res) {
+    
 
 });
 
@@ -45,16 +48,6 @@ app.post("/score", function (req, res) {
 
 
 
-
-//mongoose set up
-mongoose.connect("mongodb://localhost/test");
-var db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function(callback) {
-  // yay!
-  console.log('success');
-});
 
 
 
